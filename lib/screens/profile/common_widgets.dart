@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../viewmodel/user_view_model.dart';
 
 Widget get dividerWidget => SizedBox(
@@ -17,39 +16,23 @@ Widget textWidget(String text) => Text(
       text,
       style: const TextStyle(fontSize: 15, color: Colors.grey),
     );
-Stack userProfileImageContainer(String downloadUrl, Function uploadFromCamera) {
-  return Stack(
-    children: [
-      Container(
-        height: 200,
-        width: 200,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          image: DecorationImage(
-            image: NetworkImage(downloadUrl),
-            fit: BoxFit.cover,
-          ),
-          border: Border.all(
-            color: Colors.white,
-            width: 5,
-          ),
-        ),
+
+Container profileImageContainer() {
+  return Container(
+    height: 200,
+    width: 200,
+    decoration: BoxDecoration(
+      shape: BoxShape.circle,
+      image: DecorationImage(
+        image: NetworkImage(
+            "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1600"),
+        fit: BoxFit.cover,
       ),
-      Positioned(
-          top: 10,
-          right: 10,
-          child: CircleAvatar(
-            backgroundColor: Colors.white,
-            radius: 20,
-            child: IconButton(
-              icon: Icon(Icons.add_a_photo),
-              onPressed: () {
-                uploadFromCamera();
-                // Profil güncelleme işlemleri burada gerçekleştirilebilir
-              },
-            ),
-          ))
-    ],
+      border: Border.all(
+        color: Colors.white,
+        width: 5,
+      ),
+    ),
   );
 }
 
@@ -61,11 +44,14 @@ Text nameText(UserViewModel user) {
   );
 }
 
-SizedBox mailSizedboxAndTextForm(TextEditingController _emailController) {
+SizedBox mailSizedboxAndTextForm(
+    TextEditingController _emailController, bool editmood) {
   return SizedBox(
     width: 300,
+    height: 34,
     child: TextFormField(
       controller: _emailController,
+      enabled: editmood,
       textAlign: TextAlign.center,
       // initialValue: "user.user!.email",
       style: const TextStyle(
@@ -86,13 +72,16 @@ SizedBox mailSizedboxAndTextForm(TextEditingController _emailController) {
   );
 }
 
-SizedBox aboutSizedboxAndTextForm(TextEditingController _aboutController) {
+SizedBox aboutSizedboxAndTextForm(
+    TextEditingController _aboutController, bool editmood) {
   return SizedBox(
     width: 300,
+    height: 30,
     child: TextFormField(
+      enabled: editmood,
       controller: _aboutController,
       textAlign: TextAlign.center,
-      style: TextStyle(
+      style: const TextStyle(
           fontWeight: FontWeight.bold, fontSize: 15, color: Colors.blueGrey),
       validator: (value) {
         if (value!.isEmpty) {
@@ -109,24 +98,28 @@ SizedBox aboutSizedboxAndTextForm(TextEditingController _aboutController) {
 }
 
 SizedBox passwordSizedboxAndTextForm(TextEditingController _passwordController,
-    bool _passwordVisible, Function setstatePassword) {
+    bool _passwordVisible, Function setstatePassword, bool editmood) {
   return SizedBox(
     width: 300,
+    height: 30,
     child: TextFormField(
+      enabled: editmood,
       controller: _passwordController,
       textAlign: TextAlign.center,
       obscureText: !_passwordVisible,
       style: TextStyle(
           fontWeight: FontWeight.bold, fontSize: 15, color: Colors.blueGrey),
       decoration: InputDecoration(
-        suffixIcon: IconButton(
-          icon: _passwordVisible
-              ? Icon(Icons.visibility)
-              : Icon(Icons.visibility_off),
-          onPressed: (() {
-            setstatePassword();
-          }),
-        ),
+        suffixIcon: editmood
+            ? IconButton(
+                icon: _passwordVisible
+                    ? Icon(Icons.visibility)
+                    : Icon(Icons.visibility_off),
+                onPressed: (() {
+                  setstatePassword();
+                }),
+              )
+            : SizedBox(),
       ),
       validator: (value) {
         if (value!.isEmpty) {

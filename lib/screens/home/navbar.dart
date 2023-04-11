@@ -14,8 +14,6 @@ class NavBar extends StatefulWidget {
 
 class _NavBarState extends State<NavBar> {
   late FirebaseAuth auth;
-  late String _email = "";
-  late String _password = "";
 
   @override
   void initState() {
