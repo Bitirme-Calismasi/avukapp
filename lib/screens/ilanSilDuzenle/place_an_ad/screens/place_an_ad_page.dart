@@ -4,10 +4,10 @@ import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
-import '../../../../../../constant/app_bar_widget.dart';
-import '../../../../../../constant/constant.dart';
-import '../../../../../../constant/hukuk_category.dart';
-import '../../../../../../model/declare.dart';
+import '../../../../constant/app_bar_widget.dart';
+import '../../../../constant/constant.dart';
+import '../../../../constant/hukuk_category.dart';
+import '../../../../model/declare.dart';
 
 class PlaceAnAdPage extends StatefulWidget {
   const PlaceAnAdPage({super.key});

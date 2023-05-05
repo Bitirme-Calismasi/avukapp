@@ -1,7 +1,7 @@
 import 'package:avukapp/constant/constant.dart';
 import 'package:flutter/material.dart';
 import '../../../../constant/app_bar_widget.dart';
-import '../profile_pages/place_an_ad/place_an_ad_body.dart';
+import '../../../ilanSilDuzenle/place_an_ad/place_an_ad_body.dart';
 
 class PlaceAnAd extends StatelessWidget {
   const PlaceAnAd({super.key});

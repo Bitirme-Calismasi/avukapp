@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../../../constant/app_bar_widget.dart';
-import '../../../../../manager/navigator_manager.dart';
-import '../../../../../widgets/my_custom_list_tile.dart';
+import '../../../constant/app_bar_widget.dart';
+import '../../../manager/navigator_manager.dart';
+import '../../../widgets/my_custom_list_tile.dart';
 import 'screens/place_an_ad_list_page.dart';
 import 'screens/place_an_ad_page.dart';
 import 'screens/place_an_ad_settings_page.dart';
@@ -41,19 +41,6 @@ class _PlaceAnAdBodyState extends State<PlaceAnAdBody> {
                 );
               },
             ),
-            // const SizedBox(height: 10),
-            // GestureDetector(
-            //   child: MyCustomListTileWidget(
-            //     backgroundUrl: _editIcon,
-            //     titleName: "İlan Düzenle",
-            //   ),
-            //   onTap: () {
-            //     NavigatorManager().navigatToWidget(
-            //       context,
-            //       const PlaceAnAdSettings(),
-            //     );
-            //   },
-            // ),
             const SizedBox(height: 10),
             GestureDetector(
               child: MyCustomListTileWidget(

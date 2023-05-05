@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../../constant/app_bar_widget.dart';
+import '../../../../constant/app_bar_widget.dart';
 
 class PlaceAnAdSettings extends StatefulWidget {
   const PlaceAnAdSettings({super.key});

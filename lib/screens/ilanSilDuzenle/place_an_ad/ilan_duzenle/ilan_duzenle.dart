@@ -3,8 +3,8 @@ import 'package:avukapp/model/declare.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../../../constant/constant.dart';
-import '../../../../../../constant/hukuk_category.dart';
+import '../../../../constant/constant.dart';
+import '../../../../constant/hukuk_category.dart';
 
 class IlanDuzenle extends StatefulWidget {
   const IlanDuzenle({
@@ -17,7 +17,7 @@ class IlanDuzenle extends StatefulWidget {
 }
 
 class _IlanDuzenleState extends State<IlanDuzenle> {
-  double textfielArasiBosluk = 18;
+  double textfielArasiBosluk = 20;
   final String _editIcon = "assets/icons/profile_design.svg";
   late TextEditingController ilanBasligiController = TextEditingController();
   late TextEditingController ilanIcerigiController = TextEditingController();
@@ -41,77 +41,124 @@ class _IlanDuzenleState extends State<IlanDuzenle> {
       appBar: const CustomAppBar(appTitle: "İlan Düzenle"),
       body: Padding(
         padding: const PagePadding.allNormal(),
-        child: Column(
-          children: [
-            TextFormField(
-              decoration: inputDecoration(
-                hintTextS: "ilan başlığı",
-                labelTextS: "başlık",
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              TextFormField(
+                decoration: inputDecoration(
+                  hintTextS: "ilan başlığı",
+                  labelTextS: "başlık",
+                ),
+                controller: ilanBasligiController,
+                textInputAction: TextInputAction.next,
               ),
-              controller: ilanBasligiController,
-              textInputAction: TextInputAction.next,
-            ),
-            SizedBox(height: textfielArasiBosluk),
-            TextFormField(
-              decoration: inputDecoration(
-                hintTextS: "ilan içeriği",
-                labelTextS: "İçerik",
+              SizedBox(height: textfielArasiBosluk),
+              TextFormField(
+                decoration: inputDecoration(
+                  hintTextS: "ilan içeriği",
+                  labelTextS: "İçerik",
+                ),
+                textInputAction: TextInputAction.next,
+                controller: ilanIcerigiController,
               ),
-              textInputAction: TextInputAction.next,
-              controller: ilanIcerigiController,
-            ),
-            SizedBox(height: textfielArasiBosluk),
-            TextFormField(
-              decoration: inputDecoration(
-                hintTextS: "ilan ücreti",
-                labelTextS: "Ücret",
+              SizedBox(height: textfielArasiBosluk),
+              TextFormField(
+                decoration: inputDecoration(
+                  hintTextS: "ilan ücreti",
+                  labelTextS: "Ücret",
+                ),
+                keyboardType: TextInputType.number,
+                controller: ilanUcretController,
               ),
-              keyboardType: TextInputType.number,
-              controller: ilanUcretController,
-            ),
-            SizedBox(height: textfielArasiBosluk),
-            SizedBox(height: textfielArasiBosluk),
-            Text(
-              "Seçili Kategori: ${ilanKategoriController.text}",
-              style: customTextStyle(textSize: 16),
-            ),
-            SizedBox(height: textfielArasiBosluk),
-            Row(
-              children: [
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () async {
-                      // kullanıcı kategori seçmezse null döner
-                      // onun kontrolü yapıldı.
+              SizedBox(height: textfielArasiBosluk),
+              SizedBox(height: textfielArasiBosluk),
+              Text(
+                "Seçili Kategori: ${ilanKategoriController.text}",
+                style: customTextStyle(textSize: 16),
+              ),
+              SizedBox(height: textfielArasiBosluk),
+              Row(
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () async {
+                        // kullanıcı kategori seçmezse null döner
+                        // onun kontrolü yapıldı.
 
-                      String? ftrKtgori = await _openSelectCategory(context);
-                      if (ftrKtgori != null) {
-                        ilanKategoriController.text = ftrKtgori;
-                        print(ilanKategoriController.text);
-                      }
-                      setState(() {});
-                    },
-                    child: Container(
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: kNavyBlueColor,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Center(
-                        child: Text(
-                          "Kategori Seçimi Yap",
-                          style: customTextStyle(
-                            textSize: 16,
-                            colorx: kCreamColor,
+                        String? ftrKtgori = await _openSelectCategory(context);
+                        if (ftrKtgori != null) {
+                          ilanKategoriController.text = ftrKtgori;
+                          print(ilanKategoriController.text);
+                        }
+                        setState(() {});
+                      },
+                      child: Container(
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: kNavyBlueColor,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Center(
+                          child: Text(
+                            "Kategori Seçimi Yap",
+                            style: customTextStyle(
+                              textSize: 16,
+                              colorx: kCreamColor,
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
+                ],
+              ),
+              SizedBox(height: textfielArasiBosluk),
+              SizedBox(
+                height: 50,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: kNavyBlueColor,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Center(
+                          child: Text(
+                            "Vazgeç",
+                            style: customTextStyle(
+                              textSize: 16,
+                              colorx: kCreamColor,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Container(
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: kNavyBlueColor,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Center(
+                          child: Text(
+                            "Onayla",
+                            style: customTextStyle(
+                              textSize: 16,
+                              colorx: kCreamColor,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );

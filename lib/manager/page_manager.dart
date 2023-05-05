@@ -10,7 +10,7 @@ import '../screens/notification/notification_page.dart';
 import '../screens/profile/profile_detail/about_detail/about.dart';
 import '../screens/profile/profile_detail/language_detail/language_settings.dart';
 import '../screens/profile/profile_detail/notification_detail/notification.dart';
-import '../screens/profile/profile_detail/profile_pages/place_an_ad/place_an_ad_body.dart';
+import '../screens/ilanSilDuzenle/place_an_ad/place_an_ad_body.dart';
 import '../screens/profile/profile_detail/terms_conditions_detail/terms_conditions.dart';
 import '../screens/profile/profile_page.dart';
 import '../viewmodel/user_view_model.dart';
@@ -142,25 +142,33 @@ class _MyPageManagerState extends State<MyPageManager> {
                   fit: BoxFit.cover),
             ),
           ),
-          ListTile(
-            leading: const Icon(
-              Icons.receipt_long_outlined,
-              color: Colors.black,
+          // avukat 1, üye 0
+          if (user.isLawyer == 1)
+            ListTile(
+              leading: const Icon(
+                Icons.receipt_long_outlined,
+                color: kNavyBlueColor,
+              ),
+              title: Text(
+                "İlan Ayarları",
+                style: customTextStyle(textSize: 16),
+              ),
+              onTap: () {
+                pagePushManager.navigatToWidget(
+                  context,
+                  const PlaceAnAdBody(),
+                );
+              },
             ),
-            title: const Text("İlan Ayarları"),
-            onTap: () {
-              pagePushManager.navigatToWidget(
-                context,
-                const PlaceAnAdBody(),
-              );
-            },
-          ),
           ListTile(
             leading: const Icon(
               Icons.edit_notifications_sharp,
-              color: Colors.black,
+              color: kNavyBlueColor,
             ),
-            title: const Text("Bildirim Ayarları"),
+            title: Text(
+              "Bildirim Ayarları",
+              style: customTextStyle(textSize: 16),
+            ),
             onTap: () {
               Navigator.push(
                 context,
@@ -173,9 +181,12 @@ class _MyPageManagerState extends State<MyPageManager> {
           ListTile(
             leading: const Icon(
               Icons.language,
-              color: Colors.black,
+              color: kNavyBlueColor,
             ),
-            title: const Text("Dil Ayarları"),
+            title: Text(
+              "Dil Ayarları",
+              style: customTextStyle(textSize: 16),
+            ),
             onTap: () {
               pagePushManager.navigatToWidget(
                 context,
@@ -186,9 +197,12 @@ class _MyPageManagerState extends State<MyPageManager> {
           ListTile(
             leading: const Icon(
               Icons.account_box_outlined,
-              color: Colors.black,
+              color: kNavyBlueColor,
             ),
-            title: const Text("Hakkında"),
+            title: Text(
+              "Hakkında",
+              style: customTextStyle(textSize: 16),
+            ),
             onTap: () {
               pagePushManager.navigatToWidget(
                 context,
@@ -199,9 +213,12 @@ class _MyPageManagerState extends State<MyPageManager> {
           ListTile(
             leading: const Icon(
               Icons.rule_folder,
-              color: Colors.black,
+              color: kNavyBlueColor,
             ),
-            title: const Text("Şartlar & Koşullar"),
+            title: Text(
+              "Şartlar & Koşullar",
+              style: customTextStyle(textSize: 16),
+            ),
             onTap: () {
               pagePushManager.navigatToWidget(
                 context,
@@ -212,17 +229,23 @@ class _MyPageManagerState extends State<MyPageManager> {
           ListTile(
             leading: const Icon(
               Icons.settings,
-              color: Colors.black,
+              color: kNavyBlueColor,
             ),
-            title: const Text("Settings"),
+            title: Text(
+              "Settings",
+              style: customTextStyle(textSize: 16),
+            ),
             onTap: () {},
           ),
           ListTile(
             leading: const Icon(
               Icons.exit_to_app,
-              color: Colors.black,
+              color: kNavyBlueColor,
             ),
-            title: const Text("Exit"),
+            title: Text(
+              "Exit",
+              style: customTextStyle(textSize: 16),
+            ),
             onTap: () async {
               // showExitPopup(context);
               await showDialog(
@@ -468,6 +491,17 @@ class _MyPageManagerState extends State<MyPageManager> {
           ),
         );
       },
+    );
+  }
+
+  TextStyle customTextStyle({
+    required double textSize,
+    Color? colorx = kNavyBlueColor,
+  }) {
+    return TextStyle(
+      color: colorx,
+      fontSize: textSize,
+      fontWeight: FontWeight.w600,
     );
   }
 }

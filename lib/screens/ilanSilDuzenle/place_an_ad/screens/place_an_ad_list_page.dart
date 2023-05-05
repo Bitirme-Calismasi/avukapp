@@ -3,12 +3,12 @@ import 'package:avukapp/viewmodel/user_view_model.dart';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../../../../constant/app_bar_widget.dart';
-import '../../../../../../constant/constant.dart';
-import '../../../../../../manager/navigator_manager.dart';
-import '../../../../../../model/declare.dart';
-import '../../../../../../widgets/custom_card_widget.dart';
-import '../../../../../../widgets/custom_card_widget_button.dart';
+import '../../../../constant/app_bar_widget.dart';
+import '../../../../constant/constant.dart';
+import '../../../../manager/navigator_manager.dart';
+import '../../../../model/declare.dart';
+import '../../../../widgets/custom_card_widget.dart';
+import '../../../../widgets/custom_card_widget_button.dart';
 import '../ilan_duzenle/ilan_duzenle.dart';
 
 class PlaceAnAdList extends StatefulWidget {
