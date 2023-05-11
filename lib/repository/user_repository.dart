@@ -30,7 +30,13 @@ class UserRepository implements AuthBase {
   @override
   Future<UserModel> currentUser() async {
     UserModel user = await fireBaseAuthService.currentUser();
+    
     return await firestoreDbService.readUser(user.userID!);
+  }
+
+  @override
+  Future<UserModel> readUser(String userID) async {
+    return firestoreDbService.readUser(userID);
   }
 
   @override
@@ -81,5 +87,22 @@ class UserRepository implements AuthBase {
 
   Future<List<UserModel>> getAllUser() async {
     return await firestoreDbService.getAllUser();
+  }
+
+  Future<bool> updateUserProfileImageUrl(String userId, String imageUrl) async {
+    return await firestoreDbService.updateUserProfileImageUrl(userId, imageUrl);
+  }
+
+  Future<bool> updateEmail(String userID, String newEmail) async {
+    return await firestoreDbService.updateEmail(userID, newEmail);
+  }
+
+  Future<bool> updateUserName(String userID, String newUserName) async {
+    return await firestoreDbService.updateUserName(userID, newUserName);
+  }
+
+  @override
+  Future<bool> changeEmailAuthPass(String oldPass, String newPass) async {
+    return await fireBaseAuthService.changeEmailAuthPass(oldPass, newPass);
   }
 }

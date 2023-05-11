@@ -4,8 +4,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'constant.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
-  const CustomAppBar({super.key, required this.appTitle});
+  const CustomAppBar(
+      {super.key, required this.appTitle, this.backButtonIsActive = true});
   final String appTitle;
+  final bool? backButtonIsActive;
   @override
   State<CustomAppBar> createState() => _CustomAppBarState();
 
@@ -34,16 +36,18 @@ class _CustomAppBarState extends State<CustomAppBar> {
         color: kCreamColor,
         fontSize: 18,
       ),
-      leading: IconButton( 
-        icon: const Icon(
-          Icons.arrow_back_rounded,
-          size: 24,
-        ),
-        color: kCreamColor,
-        onPressed: () {
-          Navigator.pop(context);
-        },
-      ),
+      leading: widget.backButtonIsActive == true
+          ? IconButton(
+              icon: const Icon(
+                Icons.arrow_back_rounded,
+                size: 24,
+              ),
+              color: kCreamColor,
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            )
+          : const Text(''),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
           bottom: Radius.circular(20),

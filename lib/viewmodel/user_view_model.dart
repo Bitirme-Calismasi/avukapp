@@ -9,13 +9,12 @@ enum ViewState { Idle, Busy }
 class UserViewModel extends ChangeNotifier implements AuthBase {
   ViewState _state = ViewState.Idle;
   final UserRepository _userRepository = getIt<UserRepository>();
+  UserModel? _user;
 
+  UserModel? get user => _user;
   UserViewModel() {
     currentUser();
   }
-
-  UserModel? _user;
-  UserModel? get user => _user;
 
   ViewState get state => _state;
 
@@ -30,6 +29,7 @@ class UserViewModel extends ChangeNotifier implements AuthBase {
     try {
       state = ViewState.Busy;
       _user = await _userRepository.currentUser();
+      debugPrint('CURRENT USER USER OKUMA İŞLEMİ OLDU USERVİEWMODEL******');
       return user!;
     } catch (e) {
       debugPrint('viewmodel currentuser da hata cıktı ${e.toString()}');
@@ -37,6 +37,18 @@ class UserViewModel extends ChangeNotifier implements AuthBase {
     } finally {
       state = ViewState.Idle;
     }
+  }
+
+  @override
+  Future<UserModel> currentUserRefresh() async {
+    _user = await _userRepository.currentUser();
+    debugPrint('CURRENT USER USER OKUMA İŞLEMİ OLDU USERVİEWMODEL******');
+    return user!;
+  }
+
+  @override
+  Future<UserModel> readUser(String userID) async {
+    return _userRepository.readUser(userID);
   }
 
   @override
@@ -118,5 +130,29 @@ class UserViewModel extends ChangeNotifier implements AuthBase {
 
   Future<List<UserModel>> getAllUser() async {
     return await _userRepository.getAllUser();
+  }
+
+  Future<bool> updateUserProfileImageUrl(String userId, String imageUrl) async {
+    bool temp =
+        await _userRepository.updateUserProfileImageUrl(userId, imageUrl);
+    currentUserRefresh();
+    return temp;
+  }
+
+  Future<bool> updateEmail(String userID, String newEmail) async {
+    bool temp = await _userRepository.updateEmail(userID, newEmail);
+    currentUserRefresh();
+    return temp;
+  }
+
+  Future<bool> updateUserName(String userID, String newUserName) async {
+    bool temp = await _userRepository.updateUserName(userID, newUserName);
+    currentUserRefresh();
+    return temp;
+  }
+
+  @override
+  Future<bool> changeEmailAuthPass(String oldPass, String newPass) async {
+    return await _userRepository.changeEmailAuthPass(oldPass, newPass);
   }
 }

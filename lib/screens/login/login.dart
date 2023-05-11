@@ -221,14 +221,9 @@ class _LoginScreenState extends State<LoginScreen> {
         var userModel = Provider.of<UserViewModel>(context, listen: false);
         final UserModel user = await userModel.singInWithEmailAndPass(
             emailController.text, passwordController.text);
-        debugPrint('EMAİL İLE GİRİŞ YAPMA BAŞARILI');
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => LandingPage(),
-          ),
-        );
+        debugPrint('EMAİL İLE GİRİŞ YAPMA BAŞARILI111');
       } catch (e) {
-        debugPrint('LOGİN İŞLEMİNDE HATA  : ${e.toString()}');
+        debugPrint('LOGİN İŞLEMİNDE HATA11111  : ${e.toString()}');
       }
     }
   }

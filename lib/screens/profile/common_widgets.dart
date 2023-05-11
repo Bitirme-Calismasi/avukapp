@@ -43,13 +43,12 @@ Text nameText(String userName) {
 }
 
 SizedBox mailSizedboxAndTextForm(
-    TextEditingController _emailController, bool editmood) {
+    TextEditingController _emailController) {
   return SizedBox(
     width: 300,
     height: 40,
     child: TextFormField(
       controller: _emailController,
-      enabled: editmood,
       //initialValue: ,
       textAlign: TextAlign.center,
 
@@ -72,12 +71,11 @@ SizedBox mailSizedboxAndTextForm(
 }
 
 SizedBox aboutSizedboxAndTextForm(
-    TextEditingController _aboutController, bool editmood) {
+    TextEditingController _aboutController) {
   return SizedBox(
     width: 300,
     height: 30,
     child: TextFormField(
-      enabled: editmood,
       controller: _aboutController,
       textAlign: TextAlign.center,
       style: const TextStyle(

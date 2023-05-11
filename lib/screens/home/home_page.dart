@@ -141,6 +141,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               },
                               child: CustomCardWidget(
                                 moodel: declareModel,
+                                url: imgUrl(index),
                                 sagButton: GestureDetector(
                                   onTap: () {},
                                   child: const CustomCardWidgetButton(
@@ -343,4 +344,15 @@ class _MyHomePageState extends State<MyHomePage> {
       fontWeight: FontWeight.w500,
     );
   }
+
+  String? imgUrl(int index) {
+    for (var i = 0; i < allLawyer.length; i++) {
+      if (allDeclare[index].lawyerId == allLawyer[i].lawyerID) {
+        return allLawyer[i].profilImgURL!;
+      }
+    }
+  }
+
+
+  
 }
