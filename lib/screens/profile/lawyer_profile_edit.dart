@@ -313,7 +313,7 @@ class _LawyerProfileEditPageState extends State<LawyerProfileEditPage> {
           _newPassController.text != '000000') {
         pass = await user.changeEmailAuthPass(
             _passController.text, _newPassController.text);
-        debugPrint('DEĞİŞTİ PASS');
+        debugPrint('DEĞİŞTİ PASSi');
       }
       if (_passController.text == '000000' &&
           _newPassController.text == '000000' &&
