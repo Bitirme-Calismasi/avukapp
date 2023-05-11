@@ -100,6 +100,20 @@ class FirestoreDbService implements DBBase {
     }
   }
 
+  Future<bool> updateLawyerProfileImageUrl(
+      String lawyerID, String imageUrl) async {
+    try {
+      await firebaseFirestore
+          .collection('lawyers')
+          .doc(lawyerID)
+          .update({"profilImgURL": imageUrl});
+      return true;
+    } catch (e) {
+      print('Error updating lawyer profile image URL: $e');
+      return false;
+    }
+  }
+
   Future<bool> saveDeclare(DeclareModel declare) async {
     try {
       var _decID = firebaseFirestore.collection('declare').doc().id;
@@ -155,14 +169,16 @@ class FirestoreDbService implements DBBase {
   }
 
   @override
-  Future<void> updateUserProfileImageUrl(String userId, String imageUrl) async {
+  Future<bool> updateUserProfileImageUrl(String userId, String imageUrl) async {
     try {
       await firebaseFirestore
           .collection('users')
           .doc(userId)
-          .update({'profilImgURL': imageUrl});
+          .update({"profilImgURL": imageUrl});
+      return true;
     } catch (e) {
       print('Error updating user profile image URL: $e');
+      return false;
     }
   }
 
@@ -178,4 +194,82 @@ class FirestoreDbService implements DBBase {
     }
     return allDeclare;
   }
+
+  @override
+  Future<bool> updateUserName(String userID, String newUserName) async {
+    try {
+      await firebaseFirestore
+          .collection('users')
+          .doc(userID)
+          .update({"userName": newUserName});
+      return true;
+    } catch (e) {
+      print('Error updating user profile image URL: $e');
+      return false;
+    }
+  }
+
+  @override
+  Future<bool> updateEmail(String userID, String newEmail) async {
+    try {
+      await firebaseFirestore
+          .collection('users')
+          .doc(userID)
+          .update({"email": newEmail});
+      return true;
+    } catch (e) {
+      print('Error updating user profile image URL: $e');
+      return false;
+    }
+  }
+    Future<bool> updateLawyerUserName(String userID, String newUserName)async{
+          try {
+      await firebaseFirestore
+          .collection('lawyers')
+          .doc(userID)
+          .update({"userName": newUserName});
+      return true;
+    } catch (e) {
+      print('Error updating user profile image URL: $e');
+      return false;
+    }
+    }
+  Future<bool> updateLawyerEmail(String userID, String newEmail)async{
+              try {
+      await firebaseFirestore
+          .collection('lawyers')
+          .doc(userID)
+          .update({"email": newEmail});
+      return true;
+    } catch (e) {
+      print('Error updating user profile image URL: $e');
+      return false;
+    }
+  }
+   Future<bool> updateLawyerField(String userID, String newField)async{
+              try {
+      await firebaseFirestore
+          .collection('lawyers')
+          .doc(userID)
+          .update({"lawyerField": newField});
+      return true;
+    } catch (e) {
+      print('Error updating user profile image URL: $e');
+      return false;
+    }
+   }
+  Future<bool> updateExperision(String userID, String newExperision)async{
+                  try {
+      await firebaseFirestore
+          .collection('lawyers')
+          .doc(userID)
+          .update({"lawyerExperience": newExperision});
+      return true;
+    } catch (e) {
+      print('Error updating user profile image URL: $e');
+      return false;
+    }
+  }
+
+
 }

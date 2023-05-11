@@ -9,12 +9,11 @@ class FireBaseAuthService implements AuthBase {
 
   @override
   Future<UserModel> createWithUserEmailAndPass(
-    // NORMAL KULLANICI KAYIT OLMASI İÇİN
+      // NORMAL KULLANICI KAYIT OLMASI İÇİN
 
-    String email,
-    String pass,
-    String userName
-  ) async {
+      String email,
+      String pass,
+      String userName) async {
     final user = UserModel(userID: null, email: null, userName: null);
     try {
       UserCredential userCredential = await FirebaseAuth.instance
@@ -26,12 +25,12 @@ class FireBaseAuthService implements AuthBase {
       return user;
     }
   }
-  
 
   @override
   Future<UserModel> currentUser() async {
     // O ANKİ OTURUM AÇMIŞ KULLANICI BİLGİSİNİ BİZE VERİR (KULLANICI OTURM KAPATMADIGI SÜRECE ACIKDIR)
     try {
+      debugPrint(' FİREBASEAUTH SERVİS OTURUM AÇAN USER-LAWYER  ${user!.uid} ');
       return _userModelFromFirebase(user);
     } catch (e) {
       debugPrint('hata cıktı currentuser ${e.toString()}');
@@ -79,10 +78,10 @@ class FireBaseAuthService implements AuthBase {
     }
   }
 
-  
   @override
-  Future<UserModel> createWithLawyerAndUserEmailAndPass(String email, String pass,String userName,String baroNUmber)async {
-       final user = UserModel(userID: null, email: null, userName: null);
+  Future<UserModel> createWithLawyerAndUserEmailAndPass(
+      String email, String pass, String userName, String baroNUmber) async {
+    final user = UserModel(userID: null, email: null, userName: null);
     try {
       UserCredential userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: pass);
@@ -93,12 +92,29 @@ class FireBaseAuthService implements AuthBase {
       return user;
     }
   }
+
+  @override
+  Future<bool> changeEmailAuthPass(String oldPass, String newPass) async {
+    bool temp = false;
+    final cred =
+        EmailAuthProvider.credential(email: user!.email!, password: oldPass);
+    await user!.reauthenticateWithCredential(cred).then((value) async {
+      await user!.updatePassword(newPass).then((_) {
+        temp = true;
+      }).catchError((error) {
+        temp = false;
+      });
+    }).catchError((err) {
+      temp = false;
+    });
+    return temp;
+  }
 }
 
-  UserModel _userModelFromFirebase(User? user) {
-    // FİREBASE DEN GELEN USER BİZİM MODELİMİZE DÖNÜŞTÜRÜR
-    if (user == null) {
-      return UserModel(userID: null, email: null, userName: null);
-    }
-    return UserModel(userID: user.uid, email: user.email, userName: null);
+UserModel _userModelFromFirebase(User? user) {
+  // FİREBASE DEN GELEN USER BİZİM MODELİMİZE DÖNÜŞTÜRÜR
+  if (user == null) {
+    return UserModel(userID: null, email: null, userName: null);
   }
+  return UserModel(userID: user.uid, email: user.email, userName: null);
+}

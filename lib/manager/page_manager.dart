@@ -101,7 +101,7 @@ class _MyPageManagerState extends State<MyPageManager> {
           MyHomePage(),
           MyMessagePage(),
           MyNotificationPage(),
-          MyUserProfilePage(),
+          ProfilePage(),
         ],
       ),
       bottomNavigationBar: homeBottomBar(myPage),
