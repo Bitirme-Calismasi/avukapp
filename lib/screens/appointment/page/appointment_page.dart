@@ -10,8 +10,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-
 import '../../../constant/app_bar_widget.dart';
+import '../../../service/stripe_service.dart';
 import '../../exception/login-exception.dart';
 
 class AppointmentPage extends StatefulWidget {
@@ -52,6 +52,39 @@ class _AppointmentPageState extends State<AppointmentPage> {
   DateTime selectedDate = DateTime.now();
   final firstDate = DateTime(2010, 1);
   final lastDate = DateTime(2024, 12);
+
+  void getPriceForAppointment(DeclareModel declare) async {
+    var items = [
+      {
+        "productPrice": int.parse(declare.declarePrice.toString()),
+        "productName": "  ${declare.declareTitle.toString()} Randevusu",
+        "qty": 1
+      },
+    ];
+    var paymentResult = await StripeService.stripePaymentCheckout(
+      items,
+      500,
+      context,
+      mounted,
+      onSuccess: () async {
+        try {
+          print("Appointment saved successfully");
+          await saveAppointment();
+          Navigator.pop(context);
+        } catch (e) {
+          print("Error saving appointment: $e");
+          // Handle the error appropriately (e.g., show an error message to the user)
+        }
+      },
+      onCancel: () {
+        print("CANCEL");
+        Navigator.pop(context);
+      },
+      onError: (e) {
+        print(" ERROR: ${e.toString()}");
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -226,8 +259,9 @@ class _AppointmentPageState extends State<AppointmentPage> {
                 const SizedBox(height: 20),
                 GestureDetector(
                   onTap: () async {
-                    debugPrint('randevu oluşturmaya tıklandı');
-                    saveAppointment();
+                    debugPrint('Randevu sayfasına yönlendiriliyor...');
+                    getPriceForAppointment(widget.declare);
+                    // saveAppointment();
                   },
                   child: Container(
                     height: 50,
@@ -240,7 +274,7 @@ class _AppointmentPageState extends State<AppointmentPage> {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          "Randevu Oluştur",
+                          "Ödeme Yap",
                           textAlign: TextAlign.center,
                           style: GoogleFonts.cutiveMono(
                             color:
@@ -519,7 +553,7 @@ class _AppointmentPageState extends State<AppointmentPage> {
     );
   }
 
-  void saveAppointment() async {
+  Future<void> saveAppointment() async {
     try {
       final user = Provider.of<UserViewModel>(context, listen: false);
       final declare = Provider.of<DeclareViewModel>(context, listen: false);

@@ -24,7 +24,6 @@ void main() async {
   );
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
-
   setupLocator();
   runApp(const MyApp());
 }

@@ -38,6 +38,7 @@ dependencies:
   firebase_messaging: ^14.6.1
   flutter_local_notifications: ^14.1.0
   http: ^0.13.6
+  stripe_checkout: ^1.0.0
 
 
 
