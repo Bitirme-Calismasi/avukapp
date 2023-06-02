@@ -13,6 +13,7 @@ import 'package:provider/provider.dart';
 import '../../../constant/app_bar_widget.dart';
 import '../../../service/stripe_service.dart';
 import '../../exception/login-exception.dart';
+import '../../meeting/member/member_meeting_screen.dart';
 
 class AppointmentPage extends StatefulWidget {
   final DeclareModel declare;
@@ -53,7 +54,7 @@ class _AppointmentPageState extends State<AppointmentPage> {
   final firstDate = DateTime(2010, 1);
   final lastDate = DateTime(2024, 12);
 
-  void getPriceForAppointment(DeclareModel declare) async {
+  Future<void> getPriceForAppointment(DeclareModel declare) async {
     var items = [
       {
         "productPrice": int.parse(declare.declarePrice.toString()),
@@ -69,8 +70,6 @@ class _AppointmentPageState extends State<AppointmentPage> {
       onSuccess: () async {
         try {
           print("Appointment saved successfully");
-          await saveAppointment();
-          Navigator.pop(context);
         } catch (e) {
           print("Error saving appointment: $e");
           // Handle the error appropriately (e.g., show an error message to the user)
@@ -260,8 +259,7 @@ class _AppointmentPageState extends State<AppointmentPage> {
                 GestureDetector(
                   onTap: () async {
                     debugPrint('Randevu sayfasına yönlendiriliyor...');
-                    getPriceForAppointment(widget.declare);
-                    // saveAppointment();
+                    await saveAppointment();
                   },
                   child: Container(
                     height: 50,
@@ -587,6 +585,9 @@ class _AppointmentPageState extends State<AppointmentPage> {
               description: descriptionController.text);
           bool temp = await declare.saveAppointment(appo);
           if (temp) {
+            await getPriceForAppointment(widget.declare);
+          }
+          if (temp) {
             // ignore: use_build_context_synchronously
             await CoolAlert.show(
                 backgroundColor: kNavyBlueColor,
@@ -595,10 +596,16 @@ class _AppointmentPageState extends State<AppointmentPage> {
                 context: context,
                 type: CoolAlertType.success,
                 text: 'Talebiniz Avukata İletilmiştir',
-                autoCloseDuration: const Duration(seconds: 2),
+                autoCloseDuration: const Duration(seconds: 3),
                 confirmBtnText: ' ',
                 confirmBtnColor: Colors.white);
             //  RANDEVULARIM SAYFASI OLUŞTURULDUKTAN SONRA ORAYA YÖNLENDİRİLİCEK
+            // ignore: use_build_context_synchronously
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const MemberMeetingScreen(),
+                ));
           }
         } else {
           // ignore: use_build_context_synchronously

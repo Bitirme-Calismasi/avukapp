@@ -351,6 +351,7 @@ class FirestoreDbService implements DBBase {
     debugPrint('OKUNAN id: $id');
     DocumentSnapshot readToken =
         await firebaseFirestore.collection('userToken').doc(id).get();
+    debugPrint('OKUNAN TOKEN: ${readToken.data()}');
     String token = readToken.get('token');
     debugPrint('OKUNAN TOKEN: $token');
     return token;
