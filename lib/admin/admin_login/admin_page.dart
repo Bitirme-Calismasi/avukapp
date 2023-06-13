@@ -92,7 +92,6 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                 ),
                 onTap: () {
                   _formSubmit(context);
-                  
                 },
               )
             ],
@@ -137,9 +136,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
   }
 
   void _formSubmit(BuildContext context) {
-
     if (_formAdminKey.currentState!.validate()) {
-     
       _formAdminKey.currentState!.save();
       if (emailController.text == 'avukap@avukap.com' &&
           passwordController.text == '123456') {

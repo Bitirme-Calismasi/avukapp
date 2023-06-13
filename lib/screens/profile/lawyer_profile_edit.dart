@@ -120,7 +120,7 @@ class _LawyerProfileEditPageState extends State<LawyerProfileEditPage> {
                   child: TextFormField(
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return 'Bu alan Boş Geçileemez';
+                        return 'Bu alan Boş Geçilemez';
                       }
                     },
                     controller: _lawyerFieldController,

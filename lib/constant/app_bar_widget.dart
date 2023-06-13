@@ -37,17 +37,12 @@ class _CustomAppBarState extends State<CustomAppBar> {
       ),
       leading: IconButton(
         icon: const Icon(
-          Icons.exit_to_app,
+          Icons.arrow_back_rounded,
           size: 24,
         ),
         color: kCreamColor,
         onPressed: () {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => LoginScreen(),
-            ),
-          );
+          Navigator.pop(context);
         },
       ),
       shape: const RoundedRectangleBorder(

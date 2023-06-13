@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../../constant/app_bar_widget.dart';
 import '../../model/lawyer.dart';
+import '../../screens/login/login.dart';
 import '../../widgets/custom_button_widget.dart';
 
 class AdminPanelPage extends StatefulWidget {
@@ -49,7 +50,21 @@ class _AdminPanelPageState extends State<AdminPanelPage> {
     double screenHeight = MediaQuery.of(context).size.height - totalHeight;
 
     return Scaffold(
-      appBar: const CustomAppBar(appTitle: "Admin Panel"),
+      appBar: AppBar(
+        title: Center(child: Text("Admin Paneli")),
+        backgroundColor: kNavyBlueColor,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => LoginScreen(),
+              ),
+            );
+          },
+          icon: Icon(Icons.exit_to_app),
+        ),
+      ),
       body: isInited == false
           ? Container(
               height: screenHeight,

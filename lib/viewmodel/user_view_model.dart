@@ -132,13 +132,19 @@ class UserViewModel extends ChangeNotifier implements AuthBase {
 
   Future<bool> updateEmail(String userID, String newEmail) async {
     bool temp = await _userRepository.updateEmail(userID, newEmail);
-    currentUserRefresh();
+    if (temp) {
+      _user!.email = newEmail; // Kullanıcının e-posta bilgisini güncelle
+      notifyListeners(); // Değişiklikleri bildir
+    }
     return temp;
   }
 
   Future<bool> updateUserName(String userID, String newUserName) async {
     bool temp = await _userRepository.updateUserName(userID, newUserName);
-    currentUserRefresh();
+    if (temp) {
+      _user!.userName = newUserName; // Kullanıcının kullanıcı adını güncelle
+      notifyListeners(); // Değişiklikleri bildir
+    }
     return temp;
   }
 
