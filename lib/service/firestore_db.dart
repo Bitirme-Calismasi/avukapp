@@ -273,6 +273,17 @@ class FirestoreDbService implements DBBase {
     return allDeclare;
   }
 
+  Future<bool> deleteFavDeclare(String declareID) async {
+    try {
+      DocumentReference temp =
+          firebaseFirestore.collection('favorideclare').doc(declareID);
+      temp.delete();
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Future<bool> deleteDeclare(String declareId) async {
     DocumentReference temp =
         firebaseFirestore.collection('declare').doc(declareId);

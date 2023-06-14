@@ -93,4 +93,9 @@ class DeclareViewModel extends ChangeNotifier implements DBBaseDeclare {
   Future<List<FavDeclareModel>> getForFavorieDeclare(String userID) async {
     return declareRepository.getForFavorieDeclare(userID);
   }
+
+  @override
+  Future<bool> deleteFavDeclare(String declareID) async {
+    return declareRepository.deleteFavDeclare(declareID);
+  }
 }

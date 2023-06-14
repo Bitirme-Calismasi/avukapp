@@ -159,8 +159,10 @@ class _MyMessagePageState extends State<MyMessagePage> {
                                             ),
                                             SizedBox(width: 8),
                                             Expanded(
-                                              child: CustomCardWidgetButton(
-                                                  buttonTitle: "Sil"),
+                                              child: Expanded(
+                                                child: CustomCardWidgetButton(
+                                                    buttonTitle: "Sil"),
+                                              ),
                                             ),
                                           ],
                                         ),
