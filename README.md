@@ -17,6 +17,18 @@ User Membership: Users can share their legal problems, search for lawyers, and r
 Video Call: Enables video call functionality between lawyers and users through the platform.
 Appointment Calendar: Users can schedule and manage appointments with lawyers using the calendar feature.
 
+## Used Libraries
+
+[https://pub.dev/packages/videosdk](https://www.videosdk.live/)
+[https://pub.dev/packages/stripe_checkout](flutterstripe.io/)
+[https://pub.dev/packages/flutter_local_notifications](https://pub.dev/packages/flutter_local_notifications)
+[https://pub.dev/packages/firebase_messaging](https://firebase.flutter.dev/docs/messaging/overview/)
+[https://pub.dev/packages/provider](https://pub.dev/packages/provider)
+[https://pub.dev/packages/get_it](https://pub.dev/packages/get_it)
+[https://pub.dev/packages/image_picker](https://pub.dev/packages/image_picker)
+
+
+## Screenshots
 
 <img src="assets/proje_img/1.png" alt=" " width="200" height="400" style=" margin-right: 110px;"> | 
 <img src="assets/proje_img/2.png" alt=" " width="200" height="400" style=" margin-right: 110px;"> | 
