@@ -159,4 +159,9 @@ class DeclareRepository implements DBBaseDeclare {
   Future<List<FavDeclareModel>> getForFavorieDeclare(String userID) async {
     return await firestoreDbService.getForFavorieDeclare(userID);
   }
+
+  @override
+  Future<bool> deleteFavDeclare(String declareID) async {
+    return await firestoreDbService.deleteFavDeclare(declareID);
+  }
 }
