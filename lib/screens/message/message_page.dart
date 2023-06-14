@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../constant/constant.dart';
@@ -47,7 +48,7 @@ class _MyMessagePageState extends State<MyMessagePage> {
                         width: width * 0.9,
                         height: height * 0.3,
                         decoration: BoxDecoration(
-                          color: kNavyBlueColor.withOpacity(0.7),
+                          color: kNavyBlueColor.withOpacity(0.9),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Padding(
@@ -70,11 +71,51 @@ class _MyMessagePageState extends State<MyMessagePage> {
                                           fit: BoxFit.cover,
                                           image: NetworkImage(
                                             moodel.lawyerProfilUrl ??
-                                                "https://imgs.search.brave.com/RU0yRHJk_pU92g_cE88XYWs-HrLaxwScJqMBD1t_Sz8/rs:fit:844:225:1/g:ce/aHR0cHM6Ly90c2Uy/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC55/b0haN09DTWZyWkc5/WGVWak42Q1dRSGFF/SyZwaWQ9QXBp",
+                                                "assets/ana_2.jpeg",
                                           ),
                                         ),
                                       ),
                                     ),
+
+                                    Column(
+                                      children: [
+                                        Text(
+                                          "${moodel.declarePrice} Tl",
+                                          style:
+                                              newTextStyleMethod(textSize: 16),
+                                        ),
+                                        const SizedBox(height: 6),
+                                        SizedBox(
+                                          width: double.infinity,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                moodel.declareDate
+                                                    .toString()
+                                                    .split(' ')[0],
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: newTextStyleMethod(
+                                                    textSize: 14),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    // Row(
+                                    //   mainAxisAlignment: MainAxisAlignment.center,
+                                    //   children: [
+                                    //     for (int i = 0; i < 5; i++)
+                                    //       const Icon(
+                                    //         Icons.star,
+                                    //         size: 19,
+                                    //         color: Colors.amber,
+                                    //       ),
+                                    //   ],
+                                    // )
                                   ],
                                 ),
                               ),
@@ -95,8 +136,11 @@ class _MyMessagePageState extends State<MyMessagePage> {
                                               moodel.declareTitle ?? "Hata",
                                               maxLines: 2,
                                               overflow: TextOverflow.ellipsis,
-                                              style: newTextStyleMethod(
-                                                  textSize: 20),
+                                              style: GoogleFonts.dancingScript(
+                                                fontSize: 24,
+                                                fontWeight: FontWeight.w700,
+                                                color: Colors.grey.shade400,
+                                              ),
                                             ),
                                           ),
                                           const SizedBox(height: 12),
@@ -111,32 +155,7 @@ class _MyMessagePageState extends State<MyMessagePage> {
                                                   textSize: 16),
                                             ),
                                           ),
-                                          const SizedBox(height: 12),
-                                          SizedBox(
-                                            width: double.infinity,
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Text(
-                                                  moodel.declareDate
-                                                      .toString()
-                                                      .split(' ')[0],
-                                                  maxLines: 2,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  style: newTextStyleMethod(
-                                                      textSize: 16),
-                                                ),
-                                                Text(
-                                                  "${moodel.declarePrice} Tl",
-                                                  style: newTextStyleMethod(
-                                                      textSize: 16),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
+                                          const SizedBox(height: 8),
                                           SizedBox(
                                             width: double.infinity,
                                             child: Text(
@@ -161,7 +180,7 @@ class _MyMessagePageState extends State<MyMessagePage> {
                                             Expanded(
                                               child: CustomCardWidgetButton(
                                                   buttonTitle: "Sil"),
-                                            ),
+                                            )
                                           ],
                                         ),
                                       ),
@@ -214,3 +233,7 @@ class _MyMessagePageState extends State<MyMessagePage> {
     });
   }
 }
+/*
+
+
+ */
