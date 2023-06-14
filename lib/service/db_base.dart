@@ -39,6 +39,7 @@ abstract class DBBaseDeclare {
   Future<bool> saveAppointment(AppointmentModel appointment);
   Future<List<AppointmentModel>> getForIdAppointment(String userId);
   Future<List<AppointmentModel>> getForIdLwyerAppointment(String lawyerId);
+  Future<bool> deleteFavDeclare(String declareID);
   Future<bool> confirmAppointmentLawyer(String appointmentID,
       DateTime appointmentDate, AppointmentModel appointment);
   Future<bool> deleteAppointment(String appointmentID);
