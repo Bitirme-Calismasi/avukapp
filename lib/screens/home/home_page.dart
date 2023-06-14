@@ -2,12 +2,12 @@
 
 import 'package:avukapp/manager/navigator_manager.dart';
 import 'package:avukapp/model/declare.dart';
-import 'package:avukapp/model/fav_declare.dart';
 import 'package:avukapp/viewmodel/declare_view_model.dart';
 import 'package:avukapp/viewmodel/lawyer_view_model.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import '../../constant/constant.dart';
 import '../../constant/hukuk_category.dart';
@@ -140,8 +140,24 @@ class _MyHomePageState extends State<MyHomePage> {
                                 child: CustomCardWidget(
                                   moodel: declareModel,
                                   sagButton: GestureDetector(
-                                    onTap: () {
-                                      _saveFav(declareModel);
+                                    onTap: () async {
+                                      if (await _saveFav(declareModel)) {
+                                        Fluttertoast.showToast(
+                                            msg: 'Kayıt Başarılı',
+                                            toastLength: Toast.LENGTH_SHORT,
+                                            gravity: ToastGravity.CENTER,
+                                            backgroundColor: Colors.green,
+                                            textColor: Colors.white,
+                                            fontSize: 16.0);
+                                      } else {
+                                        Fluttertoast.showToast(
+                                            msg: 'Kayıt Başarılı değil',
+                                            toastLength: Toast.LENGTH_SHORT,
+                                            gravity: ToastGravity.CENTER,
+                                            backgroundColor: Colors.red,
+                                            textColor: Colors.white,
+                                            fontSize: 16.0);
+                                      }
                                     },
                                     child: const CustomCardWidgetButton(
                                       buttonTitle: "Kaydet",
@@ -284,14 +300,11 @@ class _MyHomePageState extends State<MyHomePage> {
         android: androidNotificationDetails, iOS: darwinNotificationDetails);
   }
 
-  Future<void> _saveFav(DeclareModel declareModel) async {
+  Future<bool> _saveFav(DeclareModel declareModel) async {
     final user = Provider.of<UserViewModel>(context, listen: false);
     final dec = Provider.of<DeclareViewModel>(context, listen: false);
-    List<FavDeclareModel> dec1 =
-        await dec.getForFavorieDeclare(user.user!.userID!);
-    dec1.forEach((element) {
-      debugPrint(element.declareId);
-    });
+    bool resoult = await dec.favoriDeclare(declareModel, user.user!.userID!);
+    return resoult;
   }
 }
 /*
