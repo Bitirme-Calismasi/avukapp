@@ -89,7 +89,7 @@ class _MyPageManagerState extends State<MyPageManager> {
         },
         children: const [
           MyHomePage(),
-          MyMessagePage(),
+          FavoritePage(),
           ProfilePage(),
         ],
       ),
