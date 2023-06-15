@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../constant/constant.dart';
+import '../screens/favorite/favorite_page.dart';
 import '../screens/home/home_page.dart';
 import '../screens/meeting/lawyer/lawyer_meet_request_screen.dart';
 import '../screens/meeting/member/member_meeting_screen.dart';
-import '../screens/message/message_page.dart';
 import '../screens/profile/profile_detail/about_detail/about.dart';
 import '../screens/profile/profile_detail/profile_pages/place_an_ad/place_an_ad_body.dart';
 import '../screens/profile/profile_detail/terms_conditions_detail/terms_conditions.dart';
@@ -89,7 +89,7 @@ class _MyPageManagerState extends State<MyPageManager> {
         },
         children: const [
           MyHomePage(),
-          MyMessagePage(),
+          FavoritePage(),
           ProfilePage(),
         ],
       ),
