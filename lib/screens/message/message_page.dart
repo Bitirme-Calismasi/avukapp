@@ -170,16 +170,32 @@ class _FavoritePageState extends State<FavoritePage> {
                                       ),
                                       SizedBox(
                                         child: Row(
-                                          children: const [
-                                            Expanded(
+                                          children: [
+                                            const Expanded(
                                               child: CustomCardWidgetButton(
                                                 buttonTitle: "Randevu Al",
                                               ),
                                             ),
-                                            SizedBox(width: 8),
+                                            const SizedBox(width: 8),
                                             Expanded(
-                                              child: CustomCardWidgetButton(
-                                                  buttonTitle: "Sil"),
+                                              child: GestureDetector(
+                                                onTap: () async {
+                                                  bool sonuc =
+                                                      await deleteFavorite(
+                                                    id: moodel.declareId!,
+                                                  );
+                                                  if (sonuc) {
+                                                    print("Silindi");
+                                                    setState(() {});
+                                                  } else {
+                                                    print("hayır");
+                                                  }
+                                                },
+                                                child:
+                                                    const CustomCardWidgetButton(
+                                                  buttonTitle: "Sil",
+                                                ),
+                                              ),
                                             )
                                           ],
                                         ),
@@ -224,6 +240,15 @@ class _FavoritePageState extends State<FavoritePage> {
       debugPrint(element.declareId);
     }
     allDeclare = dec1;
+  }
+
+  Future<bool> deleteFavorite({required String id}) async {
+    final dec = Provider.of<DeclareViewModel>(context, listen: false);
+    bool resoult = await dec.deleteFavDeclare(id);
+    print(id);
+    print(resoult);
+
+    return resoult;
   }
 
   //
