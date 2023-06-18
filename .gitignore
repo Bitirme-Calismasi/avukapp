@@ -45,3 +45,4 @@ app.*.map.json
 pubspec.lock
 firebase_options.dart
 stripe_service.dart
+stripe_service.dart
