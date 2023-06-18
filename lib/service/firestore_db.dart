@@ -41,9 +41,9 @@ class FirestoreDbService implements DBBase {
     DocumentSnapshot readUser =
         await firebaseFirestore.doc("users/${user.userID}").get();
     Map readUserDetalys = readUser.data() as Map;
-    UserModel _readUser = UserModel.fromMap(readUserDetalys);
+    UserModel readUser0 = UserModel.fromMap(readUserDetalys);
     await notificationToken(user.userID!);
-    debugPrint(_readUser.toString());
+    debugPrint(readUser0.toString());
 
     return true;
   }
@@ -111,8 +111,8 @@ class FirestoreDbService implements DBBase {
 
   Future<bool> saveDeclare(DeclareModel declare) async {
     try {
-      var _decID = firebaseFirestore.collection('declare').doc().id;
-      declare.declareId = _decID;
+      var decID = firebaseFirestore.collection('declare').doc().id;
+      declare.declareId = decID;
 
       await firebaseFirestore
           .collection('declare')
@@ -122,8 +122,8 @@ class FirestoreDbService implements DBBase {
       DocumentSnapshot readDeclare =
           await firebaseFirestore.doc("declare/${declare.declareId}").get();
       Map readDeclareDetalys = readDeclare.data() as Map;
-      DeclareModel _readDeclare = DeclareModel.fromMap(readDeclareDetalys);
-      debugPrint(_readDeclare.toString());
+      DeclareModel readDeclare0 = DeclareModel.fromMap(readDeclareDetalys);
+      debugPrint(readDeclare0.toString());
     } catch (e) {
       debugPrint('CLOUDFİRE DECLARE  HATA ÇIKTI ${e.toString()} ');
     }
@@ -242,7 +242,7 @@ class FirestoreDbService implements DBBase {
   Future<bool> favoriDeclare(DeclareModel declare, String userID) async {
     var appID = firebaseFirestore.collection('favorideclare').doc().id;
     FavDeclareModel fav = FavDeclareModel(
-        declareId: declare.declareId,
+        declareId: appID,
         lawyerId: declare.lawyerId,
         declareDate: declare.declareDate,
         declareTitle: declare.declareTitle,
