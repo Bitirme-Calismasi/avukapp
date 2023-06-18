@@ -247,7 +247,10 @@ class _FavoritePageState extends State<FavoritePage> {
     bool resoult = await dec.deleteFavDeclare(id);
     print(id);
     print(resoult);
-
+    setState(() {
+      // İlanı listeden kaldır
+      allDeclare.removeWhere((element) => element.declareId == id);
+    });
     return resoult;
   }
 
